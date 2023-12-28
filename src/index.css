@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.App {
+  @apply bg-slate-500 min-h-screen px-5 pt-20 flex flex-col lg:flex-row lg:justify-center gap-8 flex-nowrap;
+}
+
+.translateContainer {
+  @apply max-h-80 flex-none w-full lg:w-45/100 rounded-2xl p-5 border border-slate-500 font-semibold bg-slate-900 text-white;
+}
+
+header {
+  @apply flex flex-row items-center gap-3 md:gap-7 border-b border-slate-500 capitalize pb-5 text-slate-500;
+}
+
+.language {
+  @apply rounded-lg p-2  cursor-pointer;
+}
+.activeLanguage {
+  @apply bg-slate-500 text-white;
+}
+
+textarea {
+  @apply mt-5 p-2 w-full bg-transparent focus:outline-0;
+}
+
+.bottomSection {
+  @apply flex flex-row justify-between items-center mt-5;
+}
+
+.icon {
+  @apply rounded-lg p-1 border-2 border-slate-500 cursor-pointer;
+}
+
+.translateBtn {
+  @apply bg-blue-700 rounded-xl flex flex-row items-center gap-1 px-4 py-2 border border-white;
+}
+
+.icon,
+.translateBtn {
+  @apply transition ease-in-out duration-200 hover:scale-110;
+}
