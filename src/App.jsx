@@ -122,42 +122,49 @@ function App() {
     </svg>
   );
 
+  const headerLangRef = [useRef(null), useRef(null), useRef(null)];
+  const translateLangRef = [useRef(null), useRef(null), useRef(null)];
+
   const [inputText, setInputText] = useState("Hello,how are you?");
   const [translatedText, setTranslatedText] = useState(
     "Bonjour,comment allez-vous?"
   );
 
-  const headerLangRef = [useRef(null), useRef(null), useRef(null)];
-  const translateLangRef = [useRef(null), useRef(null), useRef(null)];
+  const [translateFrom, setTranslateFrom] = useState("en");
+  const [translateTo, setTranslateTo] = useState("fr");
 
   const [apiLink, setApiLink] = useState(
-    `https://api.mymemory.translated.net/get?q=Hello,how are you?!&langpair=en|it&de=jiade1233@gmail.com`
+    `https://api.mymemory.translated.net/get?q=Hello,how are you?!&langpair=${translateFrom}|${translateTo}&de=jiade1233@gmail.com`
   );
-  const [translateTo, setTranslateTo] = useState("fr");
+
   const [apiData, setApiData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [apiError, setApiError] = useState(null);
 
   const toggleActiveClass = (index) => {
     headerLangRef.forEach((ref, i) => {
-      const clicked = ref.current;
+      if (ref && ref.current) {
+        const clicked = ref.current;
 
-      if (i === index) {
-        clicked.classList.add("activeLanguage");
-      } else {
-        clicked.classList.remove("activeLanguage");
+        if (i === index) {
+          clicked.classList.add("activeLanguage");
+        } else {
+          clicked.classList.remove("activeLanguage");
+        }
       }
     });
   };
 
   const toggleActiveClassTrans = (index) => {
     translateLangRef.forEach((ref, i) => {
-      const clicked = ref.current;
+      if (ref && ref.current) {
+        const clicked = ref.current;
 
-      if (i === index) {
-        clicked.classList.add("activeLanguage");
-      } else {
-        clicked.classList.remove("activeLanguage");
+        if (i === index) {
+          clicked.classList.add("activeLanguage");
+        } else {
+          clicked.classList.remove("activeLanguage");
+        }
       }
     });
   };
@@ -189,17 +196,28 @@ function App() {
     }
   }, [apiData, isLoading]);
 
+  useEffect(() => {
+    setApiLink(
+      `https://api.mymemory.translated.net/get?q=${inputText}!&langpair=${translateFrom}|${translateTo}&de=jiade1233@gmail.com`
+    );
+
+    console.log(apiLink);
+    console.log(translateFrom);
+  }, [translateTo, translateFrom]);
+
   return (
     <div className="App">
       {/* TRANSLATE */}
       <div className="translateContainer">
         <header>
           <p className="hidden md:block">detect language</p>
+
           <p
             className="language"
             ref={headerLangRef[0]}
-            onClick={() => {
+            onClick={(e) => {
               toggleActiveClass(0);
+              setTranslateFrom(e.target.dataset.value);
             }}
             data-value="en"
           >
@@ -209,17 +227,23 @@ function App() {
           <p
             className="language"
             ref={headerLangRef[1]}
-            onClick={() => {
+            onClick={(e) => {
               toggleActiveClass(1);
+              setTranslateFrom(e.target.dataset.value);
             }}
             data-value="fr"
           >
             french
           </p>
 
-          <select name="" className="language bg-transparent">
-            <option value="esp">Spanish</option>
-            <option value="german">German</option>
+          <select
+            className="language bg-transparent"
+            onClick={(e) => {
+              setTranslateFrom(e.target.value);
+            }}
+          >
+            <option value="es">Spanish</option>
+            <option value="de">German</option>
             <option value="it">italian</option>
           </select>
         </header>
@@ -229,7 +253,7 @@ function App() {
           onChange={(e) => {
             setInputText(e.target.value);
             setApiLink(
-              `https://api.mymemory.translated.net/get?q=${e.target.value}!&langpair=en|it&de=jiade1233@gmail.com`
+              `https://api.mymemory.translated.net/get?q=${e.target.value}!&langpair=${translateFrom}|${translateTo}&de=jiade1233@gmail.com`
             );
           }}
           cols="30"
@@ -260,8 +284,9 @@ function App() {
           <p
             className="language"
             ref={translateLangRef[0]}
-            onClick={() => {
+            onClick={(e) => {
               toggleActiveClassTrans(0);
+              setTranslateTo(e.target.dataset.value);
             }}
             data-value="en"
           >
@@ -271,17 +296,25 @@ function App() {
           <p
             className="language"
             ref={translateLangRef[1]}
-            onClick={() => {
+            onClick={(e) => {
               toggleActiveClassTrans(1);
+              setTranslateTo(e.target.dataset.value);
             }}
             data-value="fr"
           >
             french
           </p>
 
-          <select name="" className="language bg-transparent">
-            <option value="esp">Spanish</option>
-            <option value="german">German</option>
+          <select
+            name=""
+            className="language bg-transparent"
+            onClick={(e) => {
+              setTranslateTo(e.target.value);
+              // console.log(e.target.value);
+            }}
+          >
+            <option value="es">Spanish</option>
+            <option value="de">German</option>
             <option value="it">italian</option>
           </select>
 
