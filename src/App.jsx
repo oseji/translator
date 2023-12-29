@@ -219,7 +219,7 @@ function App() {
             <p className="hidden md:block">detect language</p>
 
             <p
-              className="language"
+              className="language activeLanguage"
               ref={headerLangRef[0]}
               onClick={(e) => {
                 toggleActiveClass(0);
@@ -297,7 +297,7 @@ function App() {
         <div className="translateContainer">
           <header>
             <p
-              className="language"
+              className="language "
               ref={translateLangRef[0]}
               onClick={(e) => {
                 toggleActiveClassTrans(0);
@@ -309,7 +309,7 @@ function App() {
             </p>
 
             <p
-              className="language"
+              className="language activeLanguage"
               ref={translateLangRef[1]}
               onClick={(e) => {
                 toggleActiveClassTrans(1);
