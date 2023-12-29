@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import copy from "clipboard-copy";
 
 function App() {
   const iconCopy = (
@@ -189,6 +190,7 @@ function App() {
     }
   };
 
+  //UPDATE TRANSLATED TEXT
   useEffect(() => {
     if (apiData !== null && apiData !== undefined) {
       console.log(apiData);
@@ -196,142 +198,165 @@ function App() {
     }
   }, [apiData, isLoading]);
 
+  //UPDATE API LINK
   useEffect(() => {
     setApiLink(
       `https://api.mymemory.translated.net/get?q=${inputText}!&langpair=${translateFrom}|${translateTo}&de=jiade1233@gmail.com`
     );
 
     console.log(apiLink);
-    console.log(translateFrom);
+    console.log(translateTo);
   }, [translateTo, translateFrom]);
 
   return (
-    <div className="App">
-      {/* TRANSLATE */}
-      <div className="translateContainer">
-        <header>
-          <p className="hidden md:block">detect language</p>
+    <div className="App bg-[url('./assets/hero_img.jpg')]">
+      <div className="w-fit mx-auto">{iconLogo} </div>
 
-          <p
-            className="language"
-            ref={headerLangRef[0]}
-            onClick={(e) => {
-              toggleActiveClass(0);
-              setTranslateFrom(e.target.dataset.value);
+      <div className="flex flex-col lg:flex-row lg:justify-center lg:items-center gap-8 flex-nowrap mt-10">
+        {/* TRANSLATE */}
+        <div className="translateContainer">
+          <header>
+            <p className="hidden md:block">detect language</p>
+
+            <p
+              className="language"
+              ref={headerLangRef[0]}
+              onClick={(e) => {
+                toggleActiveClass(0);
+                setTranslateFrom(e.target.dataset.value);
+              }}
+              data-value="en"
+            >
+              english
+            </p>
+
+            <p
+              className="language"
+              ref={headerLangRef[1]}
+              onClick={(e) => {
+                toggleActiveClass(1);
+                setTranslateFrom(e.target.dataset.value);
+              }}
+              data-value="fr"
+            >
+              french
+            </p>
+
+            <select
+              className="language bg-transparent"
+              onClick={(e) => {
+                setTranslateFrom(e.target.value);
+              }}
+            >
+              <option value="es">Spanish</option>
+              <option value="de">German</option>
+              <option value="it">italian</option>
+            </select>
+          </header>
+
+          <textarea
+            value={inputText}
+            onChange={(e) => {
+              setInputText(e.target.value);
+              setApiLink(
+                `https://api.mymemory.translated.net/get?q=${e.target.value}!&langpair=${translateFrom}|${translateTo}&de=jiade1233@gmail.com`
+              );
             }}
-            data-value="en"
-          >
-            english
-          </p>
+            cols="30"
+            rows="5"
+            maxLength={500}
+          ></textarea>
 
-          <p
-            className="language"
-            ref={headerLangRef[1]}
-            onClick={(e) => {
-              toggleActiveClass(1);
-              setTranslateFrom(e.target.dataset.value);
-            }}
-            data-value="fr"
-          >
-            french
-          </p>
+          <div className="bottomSection">
+            <div className="flex flex-row items-center gap-2">
+              <div className="icon">{iconSound}</div>
+              <div
+                className="icon"
+                onClick={() => {
+                  copy(inputText)
+                    .then(alert("copied text"))
+                    .catch((err) => console.log(err));
+                }}
+              >
+                {iconCopy}
+              </div>
+            </div>
 
-          <select
-            className="language bg-transparent"
-            onClick={(e) => {
-              setTranslateFrom(e.target.value);
-            }}
-          >
-            <option value="es">Spanish</option>
-            <option value="de">German</option>
-            <option value="it">italian</option>
-          </select>
-        </header>
-
-        <textarea
-          value={inputText}
-          onChange={(e) => {
-            setInputText(e.target.value);
-            setApiLink(
-              `https://api.mymemory.translated.net/get?q=${e.target.value}!&langpair=${translateFrom}|${translateTo}&de=jiade1233@gmail.com`
-            );
-          }}
-          cols="30"
-          rows="5"
-          maxLength={500}
-        ></textarea>
-
-        <div className="bottomSection">
-          <div className="flex flex-row items-center gap-2">
-            <div className="icon">{iconSound}</div>
-            <div className="icon">{iconCopy}</div>
+            <button
+              className="translateBtn"
+              onClick={() => {
+                fetchData();
+              }}
+            >
+              {iconBtn} Translate
+            </button>
           </div>
-
-          <button
-            className="translateBtn"
-            onClick={() => {
-              fetchData();
-            }}
-          >
-            {iconBtn} Translate
-          </button>
         </div>
-      </div>
 
-      {/* RESULT */}
-      <div className="translateContainer">
-        <header>
-          <p
-            className="language"
-            ref={translateLangRef[0]}
-            onClick={(e) => {
-              toggleActiveClassTrans(0);
-              setTranslateTo(e.target.dataset.value);
-            }}
-            data-value="en"
-          >
-            english
-          </p>
+        {/* RESULT */}
+        <div className="translateContainer">
+          <header>
+            <p
+              className="language"
+              ref={translateLangRef[0]}
+              onClick={(e) => {
+                toggleActiveClassTrans(0);
+                setTranslateTo(e.target.dataset.value);
+              }}
+              data-value="en"
+            >
+              english
+            </p>
 
-          <p
-            className="language"
-            ref={translateLangRef[1]}
-            onClick={(e) => {
-              toggleActiveClassTrans(1);
-              setTranslateTo(e.target.dataset.value);
-            }}
-            data-value="fr"
-          >
-            french
-          </p>
+            <p
+              className="language"
+              ref={translateLangRef[1]}
+              onClick={(e) => {
+                toggleActiveClassTrans(1);
+                setTranslateTo(e.target.dataset.value);
+              }}
+              data-value="fr"
+            >
+              french
+            </p>
 
-          <select
-            name=""
-            className="language bg-transparent"
-            onClick={(e) => {
-              setTranslateTo(e.target.value);
-              // console.log(e.target.value);
-            }}
-          >
-            <option value="es">Spanish</option>
-            <option value="de">German</option>
-            <option value="it">italian</option>
-          </select>
+            <select
+              name=""
+              className="language bg-transparent"
+              onClick={(e) => {
+                setTranslateTo(e.target.value);
+                // console.log(e.target.value);
+              }}
+            >
+              <option value="es">Spanish</option>
+              <option value="de">German</option>
+              <option value="it">italian</option>
+            </select>
 
-          <div className="icon ml-auto">{iconSort}</div>
-        </header>
+            <div className="icon ml-auto">{iconSort}</div>
+          </header>
 
-        <textarea
-          value={translatedText}
-          cols="30"
-          rows="5"
-          maxLength={500}
-        ></textarea>
+          <textarea
+            value={translatedText}
+            cols="30"
+            rows="5"
+            maxLength={500}
+          ></textarea>
 
-        <div className="bottomSection">
-          <div className="flex flex-row items-center gap-2">
-            <div className="icon">{iconSound}</div>
-            <div className="icon">{iconCopy}</div>
+          <div className="bottomSection">
+            <div className="flex flex-row items-center gap-2">
+              <div className="icon">{iconSound}</div>
+              <div
+                className="icon"
+                onClick={() => {
+                  copy(translatedText)
+                    .then(alert("copied text"))
+                    .catch((err) => console.log(err));
+                }}
+              >
+                {iconCopy}
+              </div>
+            </div>
           </div>
         </div>
       </div>
