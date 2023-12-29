@@ -244,7 +244,7 @@ function App() {
 
             <select
               className="language bg-transparent"
-              onClick={(e) => {
+              onChange={(e) => {
                 setTranslateFrom(e.target.value);
               }}
             >
@@ -323,7 +323,7 @@ function App() {
             <select
               name=""
               className="language bg-transparent"
-              onClick={(e) => {
+              onChange={(e) => {
                 setTranslateTo(e.target.value);
                 // console.log(e.target.value);
               }}
