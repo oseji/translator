@@ -7,7 +7,7 @@
 }
 
 .translateContainer {
-  @apply max-h-80 flex-none w-full lg:w-45/100 rounded-2xl p-5 border border-slate-500 font-semibold bg-slate-900 text-white opacity-80;
+  @apply max-h-80 flex-none w-full lg:w-45/100 rounded-2xl p-5 border border-slate-500 font-semibold  text-white opacity-80;
 }
 
 header {

@@ -230,7 +230,7 @@ function App() {
 
       <div className="flex flex-col lg:flex-row lg:justify-center lg:items-center gap-8 flex-nowrap mt-10">
         {/* TRANSLATE */}
-        <div className="translateContainer">
+        <div className="translateContainer bg-slate-800">
           <header>
             <p className="hidden md:block">detect language</p>
 
@@ -322,7 +322,7 @@ function App() {
         </div>
 
         {/* RESULT */}
-        <div className="translateContainer">
+        <div className="translateContainer bg-slate-900">
           <header>
             <p
               className="language "
