@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import copy from "clipboard-copy";
+import { SayButton } from "react-say";
 
 function App() {
   const iconCopy = (
@@ -125,6 +126,7 @@ function App() {
 
   const headerLangRef = [useRef(null), useRef(null), useRef(null)];
   const translateLangRef = [useRef(null), useRef(null), useRef(null)];
+  const selectLangRef = [useRef(null), useRef(null)];
 
   const [inputText, setInputText] = useState("Hello,how are you?");
   const [translatedText, setTranslatedText] = useState(
@@ -154,6 +156,10 @@ function App() {
         }
       }
     });
+
+    const select0 = selectLangRef[0].current;
+    select0.classList.remove("activeLanguage");
+    select0.classList.toggle("bg-transparent");
   };
 
   const toggleActiveClassTrans = (index) => {
@@ -168,6 +174,16 @@ function App() {
         }
       }
     });
+
+    const select1 = selectLangRef[1].current;
+    select1.classList.remove("activeLanguage");
+    select1.classList.toggle("bg-transparent");
+  };
+
+  const toggleSelectClass = (index) => {
+    const selectLang = selectLangRef[index].current;
+    selectLang.classList.toggle("bg-transparent");
+    selectLang.classList.toggle("activeLanguage");
   };
 
   const fetchData = async () => {
@@ -244,8 +260,17 @@ function App() {
 
             <select
               className="language bg-transparent"
+              ref={selectLangRef[0]}
               onChange={(e) => {
                 setTranslateFrom(e.target.value);
+              }}
+              onClick={() => {
+                toggleSelectClass(0);
+
+                headerLangRef.forEach((ref) => {
+                  const lang = ref.current;
+                  lang.classList.remove("activeLanguage");
+                });
               }}
             >
               <option value="es">Spanish</option>
@@ -269,7 +294,10 @@ function App() {
 
           <div className="bottomSection">
             <div className="flex flex-row items-center gap-2">
-              <div className="icon">{iconSound}</div>
+              <SayButton className="icon" text={inputText}>
+                {iconSound}
+              </SayButton>
+
               <div
                 className="icon"
                 onClick={() => {
@@ -321,11 +349,18 @@ function App() {
             </p>
 
             <select
-              name=""
               className="language bg-transparent"
+              ref={selectLangRef[1]}
               onChange={(e) => {
                 setTranslateTo(e.target.value);
-                // console.log(e.target.value);
+              }}
+              onClick={() => {
+                toggleSelectClass(1);
+
+                translateLangRef.forEach((ref) => {
+                  const lang = ref.current;
+                  lang.classList.remove("activeLanguage");
+                });
               }}
             >
               <option value="es">Spanish</option>
@@ -345,7 +380,10 @@ function App() {
 
           <div className="bottomSection">
             <div className="flex flex-row items-center gap-2">
-              <div className="icon">{iconSound}</div>
+              <SayButton className="icon" text={translatedText}>
+                {iconSound}
+              </SayButton>
+
               <div
                 className="icon"
                 onClick={() => {
