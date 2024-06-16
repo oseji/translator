@@ -2,12 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Mulish";
+  src: url("../public/fonts/Mulish-Medium.ttf");
+}
+
 .App {
-  @apply bg-white dark:bg-black min-h-screen;
+  @apply bg-white dark:bg-black  max-w-full font-Mulish;
 }
 
 header {
-  @apply flex flex-row items-center justify-center gap-5 capitalize p-2 font-semibold text-black dark:text-white;
+  @apply flex flex-row items-center justify-center gap-5 capitalize p-5 text-black dark:text-white;
 }
 
 .themeSwitcher {
@@ -23,7 +28,7 @@ header {
 }
 
 section {
-  @apply flex flex-col gap-10 lg:gap-0 lg:flex-row lg:justify-between mt-10;
+  @apply min-h-[90dvh] flex flex-col gap-10 lg:gap-0 lg:flex-row lg:items-center lg:justify-between;
 }
 
 .translateBox {
@@ -39,19 +44,19 @@ section {
 }
 
 .langSelection {
-  @apply cursor-pointer p-1 rounded-md;
+  @apply cursor-pointer p-2 rounded-md;
 }
 
 .activeLang {
-  @apply bg-blue-600 text-white dark:bg-white dark:text-black;
+  @apply bg-blue-600 font-bold text-white dark:bg-white dark:text-black;
 }
 
 select {
-  @apply capitalize p-1 rounded-md outline-0 cursor-pointer bg-transparent;
+  @apply capitalize p-2 rounded-md outline-0 cursor-pointer bg-transparent;
 }
 
 textarea {
-  @apply p-2 rounded-md bg-slate-200 dark:bg-slate-900 dark:text-white outline-0 h-32 md:h-48 overflow-y-scroll;
+  @apply p-2 rounded-md bg-slate-200 dark:bg-slate-900 dark:text-white outline-0 h-32 md:h-48 text-xl overflow-y-scroll;
 }
 
 textarea::-webkit-scrollbar {

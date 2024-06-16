@@ -80,9 +80,12 @@ function App() {
     }
   };
 
-  const toggleSound = (phrase: string) => {
+  const toggleSound = (phrase: string, language: string) => {
     const synth = window.speechSynthesis;
     const text = new SpeechSynthesisUtterance(phrase);
+
+    text.lang = language;
+
     synth.speak(text);
   };
 
@@ -240,13 +243,13 @@ function App() {
           ></textarea>
 
           <div className="bottomGrp">
-            <div className="flex flex-row items-center gap-5">
+            <div className="flex flex-row items-center gap-10">
               <img
                 src={soundIcon}
                 alt="sound icon"
                 onClick={() => {
                   if (textToTranslate !== "") {
-                    toggleSound(textToTranslate);
+                    toggleSound(textToTranslate, translateFrom);
                   }
                 }}
               />
@@ -255,14 +258,14 @@ function App() {
                 alt="copy icon"
                 onClick={() => {
                   copy(textToTranslate)
-                    .then(() => alert(`Copied ${textToTranslate}`))
+                    .then(() => alert(`Copied: ${textToTranslate}`))
                     .catch((err) => console.log(err));
                 }}
               />
             </div>
 
             <button
-              className="px-2 py-1 rounded-md bg-blue-600 dark:bg-slate-900 text-white font-semibold hover:scale-110 transition ease-in-out duration-150"
+              className="px-3 py-1.5 rounded-md bg-blue-600 dark:bg-slate-900 text-white font-semibold hover:scale-110 transition ease-in-out duration-150"
               onClick={fetchData}
             >
               Translate
@@ -320,13 +323,13 @@ function App() {
           ></textarea>
 
           <div className="bottomGrp">
-            <div className="flex flex-row items-center gap-5">
+            <div className="flex flex-row items-center gap-10">
               <img
                 src={soundIcon}
                 alt="sound icon"
                 onClick={() => {
                   if (translatedText !== "") {
-                    toggleSound(translatedText);
+                    toggleSound(translatedText, translateTo);
                   }
                 }}
               />
@@ -335,7 +338,7 @@ function App() {
                 alt="copy icon"
                 onClick={() => {
                   copy(translatedText)
-                    .then(() => alert(`Copied ${translatedText}`))
+                    .then(() => alert(`Copied: ${translatedText}`))
                     .catch((err) => console.log(err));
                 }}
               />
