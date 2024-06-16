@@ -27,7 +27,7 @@ section {
 }
 
 .translateBox {
-  @apply bg-slate-100 dark:bg-black min-h-96 p-4 rounded-md flex flex-col gap-5 w-3/4 lg:w-[40%] mx-auto;
+  @apply bg-slate-100 dark:bg-black min-h-96 p-4 rounded-md flex flex-col gap-5 w-11/12 lg:w-[40%] mx-auto;
 }
 
 .selectedLanguageBox {
@@ -35,7 +35,7 @@ section {
 }
 
 .selectLanguageGroup {
-  @apply flex flex-row items-center justify-start gap-5 bg-slate-200 dark:bg-slate-900 dark:text-white p-2 rounded-md capitalize;
+  @apply flex flex-row items-center justify-between lg:justify-start lg:gap-5 bg-slate-200 dark:bg-slate-900 dark:text-white p-2 rounded-md capitalize;
 }
 
 .langSelection {

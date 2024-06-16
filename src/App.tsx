@@ -153,7 +153,6 @@ function App() {
 
   //UPDATE TRANSLATED TEXT
   useEffect(() => {
-    console.log(apiData);
     if (apiData !== undefined && apiData !== null) {
       setTranslatedText(() => {
         let text = "";
