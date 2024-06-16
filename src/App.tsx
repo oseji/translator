@@ -93,6 +93,7 @@ function App() {
       setApiData(result);
     } catch (err: any) {
       setError(err);
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
