@@ -23,11 +23,11 @@ header {
 }
 
 section {
-  @apply flex flex-col gap-5 lg:gap-0 lg:flex-row lg:justify-between mt-10;
+  @apply flex flex-col gap-10 lg:gap-0 lg:flex-row lg:justify-between mt-10;
 }
 
 .translateBox {
-  @apply bg-slate-100 dark:bg-black min-h-96 p-4 rounded-md flex flex-col gap-5 w-11/12 lg:w-[40%] mx-auto;
+  @apply min-h-52 md:min-h-96 p-4 rounded-md flex flex-col gap-5 w-11/12 lg:w-[40%] mx-auto text-sm;
 }
 
 .selectedLanguageBox {
@@ -51,7 +51,7 @@ select {
 }
 
 textarea {
-  @apply p-2 rounded-md bg-slate-200 dark:bg-slate-900 dark:text-white outline-0 h-48 overflow-y-scroll;
+  @apply p-2 rounded-md bg-slate-200 dark:bg-slate-900 dark:text-white outline-0 h-32 md:h-48 overflow-y-scroll;
 }
 
 textarea::-webkit-scrollbar {

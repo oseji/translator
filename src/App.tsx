@@ -80,6 +80,12 @@ function App() {
     }
   };
 
+  const toggleSound = (phrase: string) => {
+    const synth = window.speechSynthesis;
+    const text = new SpeechSynthesisUtterance(phrase);
+    synth.speak(text);
+  };
+
   const fetchData = async () => {
     setIsLoading(true);
     try {
@@ -235,7 +241,15 @@ function App() {
 
           <div className="bottomGrp">
             <div className="flex flex-row items-center gap-5">
-              <img src={soundIcon} alt="sound icon" />
+              <img
+                src={soundIcon}
+                alt="sound icon"
+                onClick={() => {
+                  if (textToTranslate !== "") {
+                    toggleSound(textToTranslate);
+                  }
+                }}
+              />
               <img
                 src={copyIcon}
                 alt="copy icon"
@@ -248,7 +262,7 @@ function App() {
             </div>
 
             <button
-              className="px-2 py-1 rounded-md bg-blue-600 dark:bg-slate-900 text-white font-semibold"
+              className="px-2 py-1 rounded-md bg-blue-600 dark:bg-slate-900 text-white font-semibold hover:scale-110 transition ease-in-out duration-150"
               onClick={fetchData}
             >
               Translate
@@ -307,7 +321,15 @@ function App() {
 
           <div className="bottomGrp">
             <div className="flex flex-row items-center gap-5">
-              <img src={soundIcon} alt="sound icon" />
+              <img
+                src={soundIcon}
+                alt="sound icon"
+                onClick={() => {
+                  if (translatedText !== "") {
+                    toggleSound(translatedText);
+                  }
+                }}
+              />
               <img
                 src={copyIcon}
                 alt="copy icon"
