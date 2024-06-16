@@ -151,6 +151,7 @@ function App() {
     );
   }, [translateFrom, translateTo, textToTranslate]);
 
+  //UPDATE TRANSLATED TEXT
   useEffect(() => {
     console.log(apiData);
     if (apiData !== undefined && apiData !== null) {
@@ -247,7 +248,7 @@ function App() {
             </div>
 
             <button
-              className="px-2 py-1 rounded-md bg-blue-600 text-white font-semibold"
+              className="px-2 py-1 rounded-md bg-blue-600 dark:bg-slate-900 text-white font-semibold"
               onClick={fetchData}
             >
               Translate
