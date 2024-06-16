@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.App {
+  @apply bg-white dark:bg-black min-h-screen;
+}
+
+header {
+  @apply flex flex-row items-center justify-center gap-5 capitalize p-2 font-semibold text-black dark:text-white;
+}
+
+.themeSwitcher {
+  @apply flex flex-row items-center p-1.5 rounded-md dark:bg-white bg-slate-100 w-16 cursor-pointer;
+}
+
+.dot {
+  @apply dark:bg-black bg-blue-600 h-3 w-3 rounded transition ease-in-out duration-150;
+}
+
+.toggledDot {
+  @apply translate-x-[340%];
+}
+
+section {
+  @apply flex flex-col gap-5 lg:gap-0 lg:flex-row lg:justify-between mt-10;
+}
+
+.translateBox {
+  @apply bg-slate-100 dark:bg-black min-h-96 p-4 rounded-md flex flex-col gap-5 w-3/4 lg:w-[40%] mx-auto;
+}
+
+.selectedLanguageBox {
+  @apply mx-auto p-1 bg-blue-600 dark:bg-white text-white dark:text-black text-xs capitalize font-semibold rounded-md text-center min-w-32;
+}
+
+.selectLanguageGroup {
+  @apply flex flex-row items-center justify-start gap-5 bg-slate-200 dark:bg-slate-900 dark:text-white p-2 rounded-md capitalize;
+}
+
+.langSelection {
+  @apply cursor-pointer p-1 rounded-md;
+}
+
+.activeLang {
+  @apply bg-blue-600 text-white dark:bg-white dark:text-black;
+}
+
+select {
+  @apply capitalize p-1 rounded-md outline-0 cursor-pointer bg-transparent;
+}
+
+textarea {
+  @apply p-2 rounded-md bg-slate-200 dark:bg-slate-900 dark:text-white outline-0 h-48 overflow-y-scroll;
+}
+
+textarea::-webkit-scrollbar {
+  @apply hidden;
+}
+
+.bottomGrp {
+  @apply flex flex-row justify-between;
+}
+
+img {
+  @apply cursor-pointer hover:scale-125 transition ease-out duration-200;
+}
