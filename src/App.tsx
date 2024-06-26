@@ -100,6 +100,7 @@ function App() {
 
       const result = await res.json();
       setApiData(result);
+      console.log(result);
     } catch (err: any) {
       setError(err);
       console.log(error);
@@ -167,10 +168,10 @@ function App() {
       setTranslatedText(() => {
         let text = "";
 
-        if (apiData.matches.length === 1) {
-          text = "Translation not found";
-        } else if (apiData.matches.length > 1) {
-          text = apiData.matches[1].translation;
+        if (apiData.responseData.translatedText) {
+          text = apiData.responseData.translatedText;
+        } else {
+          text = "Could not find translation";
         }
 
         return text;
@@ -240,7 +241,7 @@ function App() {
             onChange={(e) => {
               setTextToTranslate(e.target.value);
             }}
-          ></textarea>
+          />
 
           <div className="bottomGrp">
             <div className="flex flex-row items-center gap-10">
@@ -320,7 +321,7 @@ function App() {
             placeholder="Translated text"
             value={isLoading ? "Loading....." : translatedText}
             disabled
-          ></textarea>
+          />
 
           <div className="bottomGrp">
             <div className="flex flex-row items-center gap-10">
